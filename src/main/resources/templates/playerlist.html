@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Player list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+</head>
+<body>
+	<div class="container">
+	<div class="col-md-4">
+	<p>Kirjautujan rooli:
+	<span sec:authentication="name"> </span>
+	</p>
+		<h1>Pelaajalista</h1>
+	</div>
+	<div th:insert="navbar :: navbar">  </div>
+	
+	<div class="col-md-4" style="padding:20px 0">
+	
+		
+	</div>
+	
+	
+    <table class="table table-striped">
+		<tr>
+		    <th>ID</th>
+		    <th>Etunimi</th>
+		    <th>Sukunimi</th>
+		    <th>Pelipaikka</th>
+		    <th>Ikä</th>
+		    <th>Vahvuudet</th>
+		    <th>Heikkoudet</th>
+		    
+		    <th>Sarjataso</th>
+		    <th>Joukkue</th>
+
+		    <th>Muokkaa</th>
+		    <th sec:authorize="hasAuthority('ADMIN')"></th>
+		    
+		</tr>  
+    	<tr th:each = "player : ${players}">
+    		 <td th:text="${player.id}"></td>
+    		 <td th:text="${player.firstName}"></td>
+    		 <td th:text="${player.lastName}"></td>
+    		 <td th:text="${player.position}"></td>
+    		 <td th:text="${player.age}"></td>
+    		 <td th:text="${player.str}"></td>
+    		 <td th:text="${player.weakness}"></td>
+    		 
+    		 <td th:text="${player.team.series.level}"></td>
+    		 <td th:text="${player.team.name}"></td>
+    		 
+    		 
+   	 
+			<td><a th:href="@{/edit/{id}(id=${player.id})}">Muokkaa</a></td> 
+ 			<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id}(id=${player.id})}" class="btn btn-xs btn-danger">Delete</a></td>
+    	</tr>
+     </table>
+     <p>Voit lisätä pelaajan jo olemassa olevaan joukkueeseen. Muussa tapauksessa luo uusi joukkue, joukkueet välilehdeltä.</p>  	
+     <a href="/add" class="btn btn-success">Lisää pelaaja</a>
+     </div>
+</body>
+</html>

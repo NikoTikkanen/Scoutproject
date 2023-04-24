@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lisää pelaaja</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+	
+</head>
+<body>
+	<div class="container">
+	<div class="col-md-4">
+	<p>Kirjautujan rooli:
+	<span sec:authentication="name"> </span>
+	</p>
+	<h1>Lisää pelaaja</h1>
+	</div>
+	<div th:insert="navbar :: navbar"></div>
+	
+	<div class="col-md-6" style="padding:10px ">
+	
+		<form th:object="${player}" th:action="@{save}" action="#" method="post">
+		  	<label for="firstname">Firstname</label>
+			<input type="text" id="fname" th:field="*{firstName}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+		  	<label for="lastname">Lastname</label>
+			<input type="text" id="lname" th:field="*{lastName}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="position">Pelipaikka</label>
+			<input type="text" th:field="*{position}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+			<label for="age">Ikä</label>
+			<input type="text" th:field="*{age}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
+		  	<label for="str">Vahvuudet</label>
+			<input type="text" th:field="*{str}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="weakness">Heikkoudet</label>
+			<input type="text" th:field="*{weakness}" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			
+			
+			
+				<div style="clear: both; display: block; height: 10px;"></div>						
+		  	<label for="deplist">Joukkue</label>
+			 <select id="deplist" th:field="*{team}" class="form-control">
+       			<option th:each="team: ${team}" th:value="${team.tid}" th:text="${team.name}"></option>
+    		</select>
+			
+			
+			
+			
+    		
+			
+		  	<br>
+			
+			<input type="submit" value="Tallenna"></input>
+			</form>
+		
+	</div>
+	</div>
+</body>
+</html>

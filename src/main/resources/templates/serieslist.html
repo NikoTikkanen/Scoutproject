@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Series list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+</head>
+<body>
+	<div class="container">
+	<div class="col-md-6">
+	<p>Kirjautujan rooli:
+	<span sec:authentication="name"> </span>
+	</p>
+		<h1>Sarjat listattuna</h1>
+	</div>
+	<div th:insert="navbar :: navbar">  </div>
+	
+	<div class="col-md-4" style="padding:20px 0">
+	
+	</div>
+	
+	
+    <table class="table table-striped">
+		<tr>
+		    <th>Sarjataso</th>
+		    <th>Joukkueet</th>
+		  
+		   
+		    
+		</tr>  
+    	<tr th:each = "series : ${seriess}">
+    		
+    		 
+    		 
+    		 <td th:text="${series.level}"></td>
+    		 <td>
+    		 <p th:each="team : ${series.teams}" th:text="${team.name}" ></p>
+    		 </td>
+    		 
+    		
+   	 
+			</tr>
+     </table>  	
+     <a href="/add" class="btn btn-success">Lisää pelaaja</a>
+     </div>
+</body>
+</html>

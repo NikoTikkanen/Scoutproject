@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Series list</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" /> 
+</head>
+<body>
+	<div class="container">
+	<div class="col-md-6">
+	<p>Kirjautujan rooli:
+	<span sec:authentication="name"> </span>
+	</p>
+		<h1>Joukkueet listattuna</h1>
+	</div>
+	<div th:insert="navbar :: navbar">  </div>
+	
+	<div class="col-md-4" style="padding:20px 0">
+	
+	</div>
+	
+	
+    <table class="table table-striped">
+		<tr>
+		    <th>Joukkue</th>
+		    <th>Sarjataso</th>
+		    <th>Pelaajat</th>
+		    <th>Muokkaa</th>
+		 
+		  
+		   
+		    
+		</tr>  
+    	<tr th:each = "team : ${teams}">
+    		
+    		 
+    		 
+    		 <td th:text="${team.name}"></td>
+    		 <td>
+    		 <p th:each="series : ${team.series}" th:text="${series.level}"></p>
+    		 </td>
+    		 <td>
+    		 <p th:each="player : ${team.players}" th:text="${player.lastName}" ></p>
+    		 </td>
+    		 <td><a th:href="@{/tedit/{tid}(tid=${team.tid})}">Muokkaa</a></td> 
+    		
+   	 
+			</tr>
+     </table>  	
+     <a href="/add" class="btn btn-success">Lisää pelaaja</a>
+     
+     <a href="/addteam" class="btn btn-success">Lisää joukkue</a>
+     </div>
+</body>
+</html>
